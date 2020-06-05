@@ -30,4 +30,4 @@ The model built here inspired by Deep Speech 2 (Baidu's second revision of their
 
 ## Next Steps:
 1. Use Transformers !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :smile:
-2. I used my Laptop's GPU for training but I plan to train on the entire dataset. For this I plan to use the Nvidia Tesla P100 GPUs using GCP for better and faster computation.
+2. I used my Laptop's GPU for training a subset of the dataset as such models require loads of computation and it is not practical to leave my lappy running for days :( but I plan to train on the entire dataset. For this I plan to use the Nvidia Tesla P100 GPUs using GCP for better and faster computation.
