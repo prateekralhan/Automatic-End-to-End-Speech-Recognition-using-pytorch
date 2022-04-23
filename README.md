@@ -1,9 +1,4 @@
-# Automatic-End-to-End-Speech-Recognition-using-pytorch
-
-*******************************************************
-#### Disclaimer: 
-***This is a work in Progress***
-*******************************************************
+# Automatic-End-to-End-Speech-Recognition-using-pytorch [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![](https://img.shields.io/badge/Prateek-Ralhan-brightgreen.svg?colorB=ff0000)](https://prateekralhan.github.io/)
 
 ## Dependencies:
 1. [Pytorch](https://pytorch.org)
@@ -28,6 +23,55 @@ For handling the audio data, I am using torchaudio here which is a library built
 ## Model:
 The model built here inspired by Deep Speech 2 (Baidu's second revision of their now-famous model) with some personal improvements to the architecture. The model will have two main neural network modules - N layers of Residual Convolutional Neural Networks (ResCNN) to learn the relevant audio features, and a set of Bidirectional Recurrent Neural Networks (BiRNN) to leverage the learned ResCNN audio features. The model is topped off with a fully connected layer used to classify characters per time step.The output of the model will be a probability matrix of characters, and we'll use that probability matrix to decode the most likely characters spoken from the audio. 
 
-## Next Steps:
-1. Use Transformers !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :smile:
-2. I used my Laptop's GPU for training a subset of the dataset as such models require loads of computation and it is not practical to leave my lappy running for days :( but I plan to train on the entire dataset. For this I plan to use the Nvidia Tesla P100 GPUs using GCP for better and faster computation.
+## Streamlit Webapp
+I also developed a lightweight streamlit based webapp for performing ASR which is using *wav2vec2-base-960h* huggingface 🤗 model provided by Facebook AI.
+
+![1](https://user-images.githubusercontent.com/29462447/164911256-a5379696-0400-4e16-8d1e-430a9796ef57.png)
+![2](https://user-images.githubusercontent.com/29462447/164911263-4b036119-ca45-474a-8ac5-bd75fba77dc4.png)
+
+## Installation:
+* Simply run the command ***pip install -r requirements.txt*** to install the dependencies.
+
+## Usage:
+1. Clone this repository and install the dependencies as mentioned above.
+2. Make a directory within the directory `streamlit_app` with the name `.streamlit` *(Don't forget the dot !!)*.
+3. Create a file `config.toml` in this directory *(Be aware of the file extension !!)*.
+4. Copy-Paste the following contents in this file and save :
+```
+[theme]
+base="dark"
+primaryColor="#0fffcf"
+textColor="#0dd2c8"
+```
+5. Navigate to the root directory of this repository and simply run the command: 
+```
+streamlit run app.py
+```
+6. Navigate to http://localhost:8501 in your web-browser.
+7. By default, streamlit allows us to upload files of **max. 200MB**. If you want to have more size for uploading files, execute the command :
+```
+streamlit run app.py --server.maxUploadSize=1028
+```
+
+## Results:
+1. Perform ASR on the fly!
+![1](https://user-images.githubusercontent.com/29462447/164911256-a5379696-0400-4e16-8d1e-430a9796ef57.png)
+![2](https://user-images.githubusercontent.com/29462447/164911263-4b036119-ca45-474a-8ac5-bd75fba77dc4.png)
+
+
+### Running the Dockerized App
+1. Ensure you have Docker Installed and Setup in your OS (Windows/Mac/Linux). For detailed Instructions, please refer [this.](https://docs.docker.com/engine/install/)
+2. Navigate to the folder where you have cloned this repository ( where the ***Dockerfile*** is present ).
+3. Build the Docker Image (don't forget the dot!! :smile: ): 
+```
+docker build -f Dockerfile -t app:latest .
+```
+4. Run the docker:
+```
+docker run -p 8501:8501 app:latest
+```
+
+This will launch the dockerized app. Navigate to ***http://localhost:8501/*** in your browser to have a look at your application. You can check the status of your all available running dockers by:
+```
+docker ps
+```
